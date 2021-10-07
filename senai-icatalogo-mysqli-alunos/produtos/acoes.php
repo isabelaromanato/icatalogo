@@ -27,9 +27,12 @@ switch ($_POST["acao"]) {
         $novoNome = md5(microtime()) . "." . $extensao;
 
 
-        echo $nomeArquivo;
-        echo "<br.</br>";
-        echo $novoNome;
+        // echo $nomeArquivo;
+        // echo "<br.</br>";
+        // echo $novoNome;
+
+        //UPLOADED
+        move_uploaded_file($_FILES["foto"]["tmp_name"], "fotos/$novoNome");
 
         break;
     
