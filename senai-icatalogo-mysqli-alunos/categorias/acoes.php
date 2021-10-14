@@ -36,7 +36,7 @@ switch ($_POST ['acao']) {
         //CHAMADA DA FUNÇÃO DE VALIDAÇÃO DE ERROS:
         $erros = validaCampos();
 
-        //VERIFCAR SE EMITER ERROS 
+        //VERIFCAR SE EMITE ERROS 
 
         if (count($erros) > 0 ){
 

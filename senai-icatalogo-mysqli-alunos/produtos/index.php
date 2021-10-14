@@ -1,3 +1,18 @@
+<?php
+
+require ('../database/conexao.php');
+
+$sql = "SELECT p.*, c.descricao FROM tbl_produto p
+INNER JOIN tbl_categoria c ON
+p.categoria_id = c.id;";
+
+$resultado = mysqli_query($conexao, $sql);
+
+//TESTE DE SELEÇÃO DE DADOS:
+// var_dump($resultado); exit;
+
+// ?> 
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -32,6 +47,35 @@
 
                 <!-- LISTAGEM DE PRODUTOS (INICIO) -->
 
+                <?php
+
+                while ($produto = mysqli_fetch_array($resultado)) {
+
+                    $valor = $produto["valor"];
+                    $desconto = $produto["desconto"];
+
+                    $valorDesconto = 0;
+                    
+                    if ($desconto > 0) {
+                        
+                        $valorDesconto = ($desconto / 100) * $valor;
+
+                    }
+
+                    $qtdParcelas = $valor > 1000 ? 12 : 6;
+
+                    $valorComDesconto = $valor - $valorDesconto; 
+
+                    /*OU
+                    $valor = $valor - $valorDesconto;
+                    $valor -= $valorDesconto;
+                    */
+
+                    $valorParcela = $valorComDesconto / $qtdParcelas;
+                    
+                
+                ?>
+
                 <article class="card-produto">
 
                        <div class="acoes-produtos">
@@ -40,31 +84,34 @@
                     </div>
     
                 <figure>
-                     <img src="" />
+                     <img src="fotos/<?php echo $produto ['imagem']?>" />
                 </figure>
 
                 <section>
-
                     <span class="preco">
-                        R$ 
-                        <em>% off</em>
+                        R$ <?php  echo $valorComDesconto;?>
+                        <em><?php  echo $desconto;?>% off</em>
                     </span>
 
                     <span class="parcelamento">ou em
                         <em>
-                        x R$ sem juros
+                        <?php  echo $qtdParcelas?> x R$ sem juros
                         </em>
                     </span>
 
-                    <span class="descricao"></span>
+                    <span class="descricao"><?php echo $produto["1"];?></span>
 
                     <span class="categoria">
-                        <em></em>
+                        <em><?php echo $produto["descricao"];?></em>
                      </span>
 
                 </article>
 
+                <?php } ?>
+
                 </section>
+
+               
 
                 <!-- LISTAGEM DE PRODUTOS (FIM) -->
 
