@@ -89,13 +89,13 @@ $resultado = mysqli_query($conexao, $sql);
 
                 <section>
                     <span class="preco">
-                        R$ <?php  echo $valorComDesconto;?>
+                        R$ <?php  echo number_format($valorComDesconto, 2, ',', '.');?>
                         <em><?php  echo $desconto;?>% off</em>
                     </span>
 
                     <span class="parcelamento">ou em
                         <em>
-                        <?php  echo $qtdParcelas?> x R$ sem juros
+                        <?php  echo $qtdParcelas?> x R$ <?php  echo number_format($valorParcela, 2, ',', '.'); ?> sem juros
                         </em>
                     </span>
 
