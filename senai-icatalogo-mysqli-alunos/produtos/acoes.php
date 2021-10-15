@@ -114,8 +114,6 @@ switch ($_POST["acao"]) {
 
         $erros = validarCampos();
 
-        // var_dump($erros);exit;
-
         if (count($erros) > 0 ) {
             
           $_SESSION["erros"] = $erros;
@@ -125,7 +123,8 @@ switch ($_POST["acao"]) {
           exit;
 
         }
-        
+
+       
         //TRATAMENTO DA IMAGEM PARA UPLOAD:
 
         //RECUPERA O NOME DO ARQUIVO
@@ -174,8 +173,29 @@ switch ($_POST["acao"]) {
 
         break;
     
-    default:
-        # code...
-        break;
+  
+        case "deletar":
+
+            $produtoId = $_POST["produtoId"];
+
+            $sql = "SELECT imagem FROM tbl_produto WHERE id = $produtoId";
+
+            $resultado = mysqli_query($conexao, $sql);
+
+            $produto = mysqli_fetch_array($resultado);
+
+            // echo $produto[0];exit;
+
+            $sql = "DELETE FROM tbl_produto WHERE id = $produtoId";
+
+            $resultado = mysqli_query($conexao, $sql);
+
+           unlink("./fotos/" . $produto[0]);
+
+           header('location: index.php');
+
+            default:
+            # code...
+            break;
 }
-?> 
+?>

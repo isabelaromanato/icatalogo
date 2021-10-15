@@ -47,8 +47,6 @@ $resultado = mysqli_query($conexao, $sql);
 
           <?php
 
-          // var_dump($_SESSION["erros"]);exit;
-
           if (isset($_SESSION["erros"])) {
             
             foreach ($_SESSION["erros"] as $erro) {
