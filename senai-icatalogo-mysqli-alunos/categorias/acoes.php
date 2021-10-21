@@ -90,16 +90,13 @@ switch ($_POST ['acao']) {
 
             case 'editar':
 
-                $id = $_POST["id"];
-                $descricao = $_POST ["descricao"];
+                $produtoID = $_POST['produtoId']; 
 
-                $sql = "UPDATE tbl_categoria SET descricao = '$descricao'  WHERE id = $id";
-                // echo $sql;exit;
-                //comando em sql cercado com aspas duplas
+            $sql = "UPDATE FROM tbl_categoria WHERE id = $produtoID";
 
-                $resultado = mysqli_query($conexao, $sql);
+            $resultado = mysqli_query($conexao, $sql);
 
-                header('location: index.php');
+            header('location: index.php');
 
                 break;
 
