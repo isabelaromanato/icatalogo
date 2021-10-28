@@ -9,7 +9,7 @@ $raiz = "/Isabela-Romanato/senai-icatalogo-mysqli-alunos/senai-icatalogo-mysqli-
 <header class="header">
 
     <figure>
-        <a href="/produtos">
+        <a href="<?php echo $raiz?>/produtos">
             <img src="<?php echo $raiz?>/imgs/logo.png" />
         </a>
     </figure>
@@ -29,7 +29,7 @@ $raiz = "/Isabela-Romanato/senai-icatalogo-mysqli-alunos/senai-icatalogo-mysqli-
                 <input type="hidden" name="acao" value="login" />
                 <input type="text" name="usuario" placeholder="Usuário" />
                 <input type="password" name="senha" placeholder="Senha" />
-                <button>Entrar</button>
+                <button type="submit">Entrar</button>
             </form>
         </div>
     <?php

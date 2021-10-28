@@ -2,9 +2,9 @@
 
 require ('../database/conexao.php');
 
-$sql = "SELECT p.*, c.descricao FROM tbl_produto p
+$sql = "SELECT p.*, c.descricao AS nome_categoria FROM tbl_produto p
 INNER JOIN tbl_categoria c ON
-p.categoria_id = c.id;";
+p.categoria_id = c.id";
 
 $resultado = mysqli_query($conexao, $sql);
 
@@ -48,6 +48,11 @@ $resultado = mysqli_query($conexao, $sql);
                 <!-- LISTAGEM DE PRODUTOS (INICIO) -->
 
                 <?php
+
+                // echo "<pre>";
+                // $produto = mysqli_fetch_array($resultado);
+                // var_dump($produto);
+                // echo "<pre>";exit;
 
                 while ($produto = mysqli_fetch_array($resultado)) {
 
@@ -102,7 +107,7 @@ $resultado = mysqli_query($conexao, $sql);
                     <span class="descricao"><?php echo $produto["1"];?></span>
 
                     <span class="categoria">
-                        <em><?php echo $produto["descricao"];?></em>
+                        <em><?php echo $produto["nome_categoria"];?></em>
                      </span>
 
                 </article>
