@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $raiz = "/Isabela-Romanato/senai-icatalogo-mysqli-alunos/senai-icatalogo-mysqli-alunos/";
 
 ?>
@@ -14,7 +16,7 @@ $raiz = "/Isabela-Romanato/senai-icatalogo-mysqli-alunos/senai-icatalogo-mysqli-
         </a>
     </figure>
 
-    
+
  <?php
     if (!isset($_SESSION["usuarioId"])) {
     ?>
@@ -25,7 +27,7 @@ $raiz = "/Isabela-Romanato/senai-icatalogo-mysqli-alunos/senai-icatalogo-mysqli-
         </nav>
         <div id="container-login" class="container-login">
             <h1>Fazer Login</h1>
-            <form method="POST" action="/componentes/header/acoesLogin.php">
+            <form method="POST" action="<?php echo $raiz?>/componentes/header/acoesLogin.php">
                 <input type="hidden" name="acao" value="login" />
                 <input type="text" name="usuario" placeholder="Usuário" />
                 <input type="password" name="senha" placeholder="Senha" />
@@ -40,7 +42,7 @@ $raiz = "/Isabela-Romanato/senai-icatalogo-mysqli-alunos/senai-icatalogo-mysqli-
                 <a id="menu-admin" onclick="logout()">Sair</a>
             </ul>
         </nav>
-        <form id="form-logout" style="display:none" method="POST" action="/componentes/header/acoesLogin.php">
+        <form id="form-logout" style="display:none" method="POST" action="<?php echo $raiz?>/componentes/header/acoesLogin.php">
             <input type="hidden" name="acao" value="logout" />
         </form>
     <?php

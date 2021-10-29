@@ -1,25 +1,57 @@
 <?php
 
+session_start();
+
 require('../../database/conexao.php');
 
-function realizarLogin($usuario, $senha, $conexao){
+// FUNÇÕES DE LOGIN/LOGOUT
 
-    $sql =  "SELECT * FROM tbl_administrador WHERE usuario = '$usuario' AND senha = '$senha'";
+function realizarLogin($usuario, $senha, $conexao)
+{
 
-    $resultado = mysqli_query($conexao, $sql);
+  $sql =  "SELECT * FROM tbl_administrador WHERE usuario = '$usuario' AND senha = '$senha'";
 
-    $dadosUsuario = mysqli_fetch_array($resultado);
+  $resultado = mysqli_query($conexao, $sql);
 
-    if (isset($dadosUsuario["usuario"]) && isset ($dadosUsuario["senha"])) {
+  $dadosUsuario = mysqli_fetch_array($resultado);
 
-      echo 'LOGADO! ';
+  if (isset($dadosUsuario["usuario"]) && isset($dadosUsuario["senha"])) {
 
-    } else {
-        echo 'ALGO DEU ERRADO :( !!!';
-    }
+    $_SESSION["usuarioId"] = $dadosUsuario["id"];
+    $_SESSION["nome"] = $dadosUsuario["nome"];
 
+    // echo $_SESSION["usuarioId"];
+    // echo $_SESSION["nome"];
+
+    header("location: ../../produtos/index.php");
+
+  } else {
+    header("location: ../../produtos/index.php");
+  }
 }
 
-realizarLogin('isabela', '12356', $conexao)
+switch ($_POST["acao"]) {
+  case 'login':
 
-?>
+    $usuario = $_POST["usuario"];
+    $senha = $_POST["senha"];
+
+    // var_dump($_POST);
+
+    realizarLogin($usuario, $senha, $conexao);
+
+    //usuario: isabela
+    //senha: 12356
+    break;
+
+    case 'logout':
+
+      // echo 'FAZENDO LOGOUT!';
+
+      session_destroy();
+      header("location: ../../produtos/index.php");
+
+  default:
+    # code...
+    break;
+}
