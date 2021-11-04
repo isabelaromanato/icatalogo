@@ -4,12 +4,14 @@ session_start();
 
 require('../../database/conexao.php');
 
-// FUNÇÕES DE LOGIN/LOGOUT
+// FUNÇÕES DE LOGIN/LOGOUT 
 
 function realizarLogin($usuario, $senha, $conexao)
 {
 
-  $sql =  "SELECT * FROM tbl_administrador WHERE usuario = '$usuario' AND senha = '$senha'";
+  $sql =  "SELECT * FROM tbl_administrador WHERE usuario = '$usuario'";
+
+  // echo $sql; exit;
 
   $resultado = mysqli_query($conexao, $sql);
 
